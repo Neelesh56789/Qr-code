@@ -77,9 +77,12 @@ describe('QR Code Generator', () => {
         cy.wait(5000); 
         cy.get('.mt-2.mb-1').should('not.exist');
     });
+});
+    describe('QR Code Generator', () => {
+        beforeEach(()=>{
+            cy.visit('http://localhost:3000'); 
+        })
     it('should be responsive', () => {
-        cy.visit('http://localhost:3000');
-        
         cy.viewport(1200, 800);
         cy.wait(500); // It is sometimes good to wait for a moment to let the page adjust
         cy.screenshot('Desktop View');
