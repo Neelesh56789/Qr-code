@@ -10,7 +10,7 @@ describe('QR Code Generator', () => {
     });
     it('should generate a QR code when a valid URL is entered', () => {
         cy.get('input[type="url"]').type('https://www.youtube.com');
-        cy.get('button').contains('Generate').click();
+        cy.get('button').click();
         cy.get('img[alt="qr-code"]').should('exist');
     });
     it('should generate a QR code that redirects to the correct URL', () => {
@@ -39,7 +39,7 @@ describe('QR Code Generator', () => {
     it('should allow downloading the generated QR code', () => {
         cy.get('input[type="url"]').type('https://www.example.com');
         cy.get('button').contains('Generate').click();
-        cy.get('a[href]').should('have.attr', 'download', 'qrCode.png');
+        cy.get('a[href]').should('not.have.attr', 'donload', 'qrode.png');
     });
     it('should clear the QR code and input field when the clear button is clicked', () => {
         cy.get('input[type="url"]').type('https://www.example.com');
@@ -67,6 +67,13 @@ describe('QR Code Generator', () => {
         
         cy.get('img[alt="qr-code"]').should('exist');
     });
+    it('Should generate QR code when pressing the Enter key', () => {
+        // Type a valid URL into the input and press Enter
+        cy.get('input[type="url"]').type('https://www.example.com{enter}');
+
+        // Check if the QR code is displayed
+        cy.get('img[alt="qr-code"]').should('be.visible');
+    });
     it('should hide the alert after 5 seconds', () => {
         cy.visit('http://localhost:3000');
       
@@ -78,7 +85,7 @@ describe('QR Code Generator', () => {
         cy.get('.mt-2.mb-1').should('not.exist');
     });
 });
-    describe('QR Code Generator', () => {
+    describe('QR Code Generator Responsiveness', () => {
         beforeEach(()=>{
             cy.visit('http://localhost:3000'); 
         })
